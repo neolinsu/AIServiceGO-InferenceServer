@@ -1,0 +1,7 @@
+
+
+set timeout 500
+set password root
+
+spawn scp temp 192.168.0.1:/root
+expect "*password*" {send "$password\r"}

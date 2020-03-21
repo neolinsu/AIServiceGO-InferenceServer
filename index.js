@@ -4,19 +4,20 @@ var fs = require('fs')
 
 app = 'classi01'
 
-function process_data(data) {
+function process_data(data, callback) {
   fs.writeFile('temp', data, 'binary', function(err) {
     if (err) {
       console.log(err);
     } else {
       console.log('The file was saved!');
-      exec('scp temp 192.168.0.1:/xxxx', (status, output) => {
+      exec('expect scp.expect', (status, output) => {
         console.log(status);
         console.log(output);
       });
-      exec('ssh user@remoteNode "cd /xxxx; xxxx', (status, output) => {
+      exec('expect run.expect', (status, output) => {
         console.log(status);
         console.log(output);
+        callback(output);
       });
     }
   });
@@ -38,7 +39,9 @@ ws.connect('ws://182.92.8.1:8001', (conn) => {
     })
     inStream.on('end', function() {
       console.log('Received ' + data.length + ' bytes of binary data');
-      process_data(data);
+      process_data(
+          data,
+          (output) => {conn.sendText(output, (info) => console.log(info))});
     })
   })
 })
