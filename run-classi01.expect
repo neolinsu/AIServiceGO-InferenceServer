@@ -1,5 +1,6 @@
 set timeout 500
 set password root
 
-spawn ssh root@192.168.1.154 "cd /media/card/resnet50 && ./resnet50.elf"
+spawn ssh root@192.168.1.154 "cd /media/card/resnet50 && ./resnet50.elf > temp.result"
 expect "*password*" {send "$password\r"}
+interact

@@ -11,16 +11,15 @@ function process_data(data, callback) {
     } else {
       if (app == 'classi01') {
         console.log('The file was saved!');
-        exec(
-            'expect scp.expect',
-            (status, output) => {
-                // console.log(status);
-                // console.log(output);
+        exec('expect scp_to.expect', (status, output) => {
+          exec('expect run-classi01.expect', (status, output) => {
+            exec('expect scp_back.expect', (status, output) => {
+              fs.readFile('temp.result', 'utf-8', (err, data) => {
+                if (err) throw err;
+                console.log(data);
+              });
             });
-        exec('expect run-classi01.expect', (status, output) => {
-          // console.log(status);
-          // console.log(output);
-          callback(output);
+          });
         });
       }
     }
