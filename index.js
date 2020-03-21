@@ -9,16 +9,18 @@ function process_data(data, callback) {
     if (err) {
       console.log(err);
     } else {
-      console.log('The file was saved!');
-      exec('expect scp.expect', (status, output) => {
-        console.log(status);
-        console.log(output);
-      });
-      exec('expect run-class.expect', (status, output) => {
-        console.log(status);
-        console.log(output);
-        callback(output);
-      });
+      if (app == 'classi01') {
+        console.log('The file was saved!');
+        exec('expect scp.expect', (status, output) => {
+          console.log(status);
+          console.log(output);
+        });
+        exec('expect run-classi01.expect', (status, output) => {
+          console.log(status);
+          console.log(output);
+          callback(output);
+        });
+      }
     }
   });
 }
