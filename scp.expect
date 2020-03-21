@@ -3,5 +3,5 @@
 set timeout 500
 set password root
 
-spawn scp temp 192.168.0.1:/root
+spawn scp temp 192.168.0.1:/media/card/resnet50/image/
 expect "*password*" {send "$password\r"}

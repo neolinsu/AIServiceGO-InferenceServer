@@ -14,7 +14,7 @@ function process_data(data, callback) {
         console.log(status);
         console.log(output);
       });
-      exec('expect run.expect', (status, output) => {
+      exec('expect run-class.expect', (status, output) => {
         console.log(status);
         console.log(output);
         callback(output);
@@ -23,7 +23,7 @@ function process_data(data, callback) {
   });
 }
 
-ws.connect('ws://182.92.8.1:8001', (conn) => {
+conn = ws.connect('ws://182.92.8.1:8001', () => {
   console.log('Success.');
   conn.on('text', (text) => {
     console.log(text);
